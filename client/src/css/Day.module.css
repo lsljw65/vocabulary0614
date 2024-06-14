@@ -1,0 +1,10 @@
+.day {
+  display: flex;
+  padding-left: 50px;
+}
+.day span {
+  padding: 10px 20px;
+  margin-left: 10px;
+  border-bottom: 2px solid #333;
+  /* border-radius: 5px; */
+}
