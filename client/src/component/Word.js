@@ -1,5 +1,6 @@
 import styles from "../css/Words.module.css";
 import { useParams } from "react-router-dom";
+import WordView from "./WordView";
 export default function Word(props) {
   // 해당 날자의 자료만 출력 설정
   const a = useParams();
@@ -15,10 +16,7 @@ export default function Word(props) {
         <tbody>
           {/*  */}
           {wordFilter.map((word) => (
-            <tr>
-              <td>{word.eng}</td>
-              <td>{word.kor}</td>
-            </tr>
+            <WordView word={word} key={word.id} />
           ))}
           {/* 속성을 받아 자료전체 출력 */}
           {/* {props.wordList.map((word) => (
