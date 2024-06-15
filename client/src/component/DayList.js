@@ -20,7 +20,7 @@ export default function DayList() {
   };
   return (
     <div className="daylist">
-      <h2>dayList</h2>
+      {/* <h2>dayList</h2> */}
       <Day dayList={dayList} />
     </div>
   );
