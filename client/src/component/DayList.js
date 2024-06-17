@@ -17,10 +17,9 @@ export default function DayList() {
     getDayListData();
   }, [fetchUrl]);
 
-  /* const getDayListData = async () => {
-    const result = await axios("http://localhost:8000/days");
-    setDayList(result.data);
-  }; */
+  if (dayList.length === 0) {
+    return <span>Loding...</span>;
+  }
   return (
     <div className="daylist">
       {dayList.map((day) => (

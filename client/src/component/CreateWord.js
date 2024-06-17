@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 export default function CreateWord() {
   const [days, setDays] = useState([]);
   const history = useNavigate();
+  const [isLoading, setIsLoding] = useState(false);
   const url = "http://localhost:8000/days";
 
   useEffect(() => {
@@ -20,24 +21,28 @@ export default function CreateWord() {
   function onSubmit(e) {
     e.preventDefault();
 
-    // isDone 고정
-    fetch(url2, {
-      method: "POST",
-      headers: {
-        "Content-type": "application/json",
-      },
-      body: JSON.stringify({
-        day: dayRef.current.value,
-        eng: engRef.current.value,
-        kor: korRef.current.value,
-        isDone: 0,
-      }),
-    }).then((res) => {
-      if (res.ok) {
-        alert("생성이 완료되었습니다");
-        history(`/word/${dayRef.current.value}`);
-      }
-    });
+    if (!isLoading) {
+      setIsLoding(true);
+      // isDone 고정
+      fetch(url2, {
+        method: "POST",
+        headers: {
+          "Content-type": "application/json",
+        },
+        body: JSON.stringify({
+          day: dayRef.current.value,
+          eng: engRef.current.value,
+          kor: korRef.current.value,
+          isDone: 0,
+        }),
+      }).then((res) => {
+        if (res.ok) {
+          alert("생성이 완료되었습니다");
+          history(`/word/${dayRef.current.value}`);
+          setIsLoding(false);
+        }
+      });
+    }
   }
 
   const engRef = useRef(null);
@@ -64,7 +69,14 @@ export default function CreateWord() {
           ))}
         </select>
       </div>
-      <button>저장</button>
+      "
+      <button
+        style={{
+          opacity: isLoading ? 0.3 : 1,
+        }}
+      >
+        {isLoading ? "Saving..." : "저장"}
+      </button>
     </form>
   );
 }

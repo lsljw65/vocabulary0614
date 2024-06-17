@@ -32,6 +32,7 @@ export default function Words() {
   return (
     <div>
       <h2 className={styles.wordH2}>Day {day}</h2>
+      {Words.length === 0 && <span>Loading...</span>}
       <table>
         <tbody>
           {/*  */}
