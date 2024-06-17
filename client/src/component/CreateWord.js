@@ -20,7 +20,7 @@ export default function CreateWord() {
     e.preventDefault();
     console.log(engRef.current.value);
     console.log(korRef.current.value);
-    console.log(dayRef.current.valueOf);
+    console.log(dayRef.current.value);
 
     // isDone 고정
     fetch(url2, {
@@ -29,9 +29,10 @@ export default function CreateWord() {
         "Content-type": "application/json",
       },
       body: JSON.stringify({
-        day: dayRef.current.valueOf,
+        day: dayRef.current.value,
         eng: engRef.current.value,
-        kor: engRef.current.value,
+        kor: korRef.current.value,
+        isDone: 0,
       }),
     }).then((res) => {
       if (res.ok) {

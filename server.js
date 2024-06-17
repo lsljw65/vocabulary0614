@@ -69,7 +69,7 @@ app.delete("/words/:id", (req, res) => {
   });
 });
 
-app.post("/words/", (req, res) => {
+/* app.post("/words", (req, res) => {
   const { day, eng, kor } = req.body;
   console.log(`day:${day}, eng:${eng}, kor:${kor}`);
   const sql = "insert int words(day,eng,kor) value(?)";
@@ -77,6 +77,19 @@ app.post("/words/", (req, res) => {
   db.query(sql, [values], (err, results) => {
     if (err) {
       console.log("실패", err);
+      return res.json(err);
+    } else {
+      console.log("성공");
+      return res.json(data);
+    }
+  });
+}); */
+app.post("/words", (req, res) => {
+  const sql = "insert into words(`day`,`eng`,`kor`,`isDone` ) value (?)";
+  const values = [req.body.day, req.body.eng, req.body.kor, req.body.isDone];
+  db.query(sql, [values], (err, data) => {
+    if (err) {
+      console.log("실패");
       return res.json(err);
     } else {
       console.log("성공");
