@@ -97,6 +97,19 @@ app.post("/words", (req, res) => {
     }
   });
 });
+app.post("/days", (req, res) => {
+  const sql = "insert into days(`day`) value (?)";
+  const values = [req.body.day];
+  db.query(sql, [values], (err, data) => {
+    if (err) {
+      console.log("실패");
+      return res.json(err);
+    } else {
+      console.log("성공");
+      return res.json(data);
+    }
+  });
+});
 app.listen(PORT, () => {
   console.log("서버실행");
   console.log(`Sever On :http://localhost:${PORT}`);

@@ -1,8 +1,9 @@
 import { useEffect, useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function CreateWord() {
   const [days, setDays] = useState([]);
-
+  const history = useNavigate();
   const url = "http://localhost:8000/days";
 
   useEffect(() => {
@@ -18,9 +19,6 @@ export default function CreateWord() {
   const url2 = "http://localhost:8000/words/";
   function onSubmit(e) {
     e.preventDefault();
-    console.log(engRef.current.value);
-    console.log(korRef.current.value);
-    console.log(dayRef.current.value);
 
     // isDone 고정
     fetch(url2, {
@@ -37,6 +35,7 @@ export default function CreateWord() {
     }).then((res) => {
       if (res.ok) {
         alert("생성이 완료되었습니다");
+        history(`/word/${dayRef.current.value}`);
       }
     });
   }
