@@ -1,3 +1,4 @@
 .daylist {
   background-color: aliceblue;
+  display: flex;
 }

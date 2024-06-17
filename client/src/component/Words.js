@@ -6,20 +6,27 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 
 export default function Words() {
-  const { day } = useParams();
+  const a = useParams();
+  const day = a.day;
   const [wordList, setWordList] = useState([]);
-
+  const fetchUrl = `http://localhost:8000/words?day=${day}`;
   //componentDidMount
   useEffect(() => {
+    const getWordListData = async () => {
+      const result = await axios(fetchUrl);
+      // console.log(result);
+      // console.log(result.data);
+      setWordList(result.data);
+    };
     getWordListData();
-  }, []);
+  }, [fetchUrl]);
 
-  const getWordListData = async () => {
-    const result = await axios("http://localhost:8000/words");
+  /* const getWordListData = async () => {
+    const result = await axios(`http://localhost:8000/words`);
     console.log(result);
     console.log(result.data);
     setWordList(result.data);
-  };
+  }; */
   const wordFilter = wordList.filter((word) => word.day === Number(day));
 
   return (
@@ -33,6 +40,7 @@ export default function Words() {
           ))}
         </tbody>
       </table>
+
       {/* <Word wordList={wordList} /> */}
     </div>
   );

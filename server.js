@@ -39,15 +39,51 @@ app.get("/words", (req, res) => {
   console.log("/words");
   db.query("select * from words", (err, word) => {
     if (!err) {
-      console.log("data", word);
+      // console.log("data", word);
       return res.json(word);
     } else {
-      console.log("err", err);
+      // console.log("err", err);
       return res.json(err);
     }
   });
 });
 
+app.put("/words/:id", (req, res) => {
+  console.log(res.json());
+  const { id, day, eng, kor, isDone } = req.body;
+  console.log(`id:${id},day:${day},eng:${eng},kor:${kor},isDone:${isDone}`);
+  const sql = "update words set isDone=? where id=?";
+  db.query(sql, [isDone, id], (err, results, fields) => {
+    console.log("err", err);
+    console.log("results", results);
+  });
+});
+
+app.delete("/words/:id", (req, res) => {
+  console.log(res.json());
+  const id = req.params.id;
+  const sql = "delete from words where id=?";
+  db.query(sql, [id], (err, results) => {
+    console.log("err", err);
+    console.log("results", results);
+  });
+});
+
+app.post("/words/", (req, res) => {
+  const { day, eng, kor } = req.body;
+  console.log(`day:${day}, eng:${eng}, kor:${kor}`);
+  const sql = "insert int words(day,eng,kor) value(?)";
+  const values = [req.body.day, req.body.eng, req.body.kor];
+  db.query(sql, [values], (err, results) => {
+    if (err) {
+      console.log("실패", err);
+      return res.json(err);
+    } else {
+      console.log("성공");
+      return res.json(data);
+    }
+  });
+});
 app.listen(PORT, () => {
   console.log("서버실행");
   console.log(`Sever On :http://localhost:${PORT}`);

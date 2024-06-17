@@ -5,7 +5,7 @@ export default function Day(props) {
   return (
     <div className={styles.day}>
       {props.dayList.map((data) => (
-        <Link to={`/word/${data.day}`}>Day {data.day}</Link>
+        <Link to={`/words/${data.day}`}>Day {data.day}</Link>
       ))}
     </div>
   );

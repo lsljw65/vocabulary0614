@@ -6,9 +6,9 @@ export default function Header() {
         <Link to="/">토익 영단어(고급)</Link>
       </h2>
       <div className="menu">
-        <a href="#x" className="link">
+        <Link to="/create-word" className="link">
           단어 추가
-        </a>
+        </Link>
         <a href="#x" className="link">
           Day 추가
         </a>
